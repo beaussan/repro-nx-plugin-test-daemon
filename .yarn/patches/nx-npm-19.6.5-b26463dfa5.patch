@@ -1,0 +1,24 @@
+diff --git a/src/project-graph/plugins/internal-api.js b/src/project-graph/plugins/internal-api.js
+index f95e2d686d86afd924d7286856ea4a99ff070844..0aeb0edaec94c52f8bf7abed30b1454c795b3720 100644
+--- a/src/project-graph/plugins/internal-api.js
++++ b/src/project-graph/plugins/internal-api.js
+@@ -9,6 +9,7 @@ const path_1 = require("path");
+ const workspace_root_1 = require("../../utils/workspace-root");
+ const angular_json_1 = require("../../adapter/angular-json");
+ const isolation_1 = require("./isolation");
++const { performance } = require("perf_hooks");
+ const loader_1 = require("./loader");
+ const utils_1 = require("./utils");
+ const error_types_1 = require("../error-types");
+diff --git a/src/project-graph/plugins/isolation/plugin-pool.js b/src/project-graph/plugins/isolation/plugin-pool.js
+index 9773e954d5d2e0b77cc5af816ae525f4e3da538f..80092bdb3250450c5e6927d58aee9fe8e62d9d9c 100644
+--- a/src/project-graph/plugins/isolation/plugin-pool.js
++++ b/src/project-graph/plugins/isolation/plugin-pool.js
+@@ -234,6 +234,7 @@ function registerPendingPromise(tx, pending, callback, context) {
+ }
+ global.nxPluginWorkerCount ??= 0;
+ async function startPluginWorker() {
++    console.trace('Starting the nx plugin worker');
+     // this should only really be true when running unit tests within
+     // the Nx repo. We still need to start the worker in this case,
+     // but its typescript.
